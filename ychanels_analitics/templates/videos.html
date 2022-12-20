@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'dracula-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'custom.css' %}">
+</head>
+
+<body>
+
+    <h2 class="drac-heading drac-heading-xl drac-text-white" style="text-align: center"> {{ title }} </h2>
+
+    <ul class="drac-tabs drac-tabs-white">
+        <li id="tabR_0" class="drac-tab drac-tab-active">
+            <a class="drac-tab-link drac-text" href="javascript:changeToTab0()">Day</a>
+        </li>
+        <li id="tabR_1" class="drac-tab">
+            <a class="drac-tab-link tab2 drac-text" href="javascript:changeToTab1()">Week</a>
+        </li>
+        <li id="tabR_2" class="drac-tab">
+            <a class="drac-tab-link tab2 drac-text" href="javascript:changeToTab2()">Month</a>
+        </li>
+    </ul>
+    {% for analytics in data %}
+    {% with counter=forloop.counter0 %}
+
+    <div {% if counter != 0 %} style="display:none" {% endif %} id="div_tabR_{{counter}}">
+        {% for plot in analytics.plots %}
+        <div>
+            <div variant="subtle"
+                class="drac-box drac-card drac-card-subtle drac-border-purple drac-bg-pink drac-p-md drac-m-md">
+                <span class="drac-text drac-line-height drac-text-pink">
+                    {% autoescape off %}
+                    {{ plot }}
+                    {% endautoescape %}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endwith %}
+    {% endfor %}
+    <h2 class="drac-heading drac-heading-xl drac-text-white"> Get historical analytics(Start={{form_start_date}}):
+    </h2>
+    <div>
+        <div variant="subtle" class="drac-box drac-card drac-card-subtle drac-border-cyan drac-p-md drac-m-md">
+            <span class="drac-text drac-line-height drac-text-pink">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="drac-btn drac-bg-purple drac-btn-outline drac-text-purple drac-m-sm" type="submit"
+                        value="Submit">
+                </form>
+            </span>
+        </div>
+    </div>
+    </div>
+    <div>
+        <div variant="subtle"
+            class="drac-box drac-card drac-card-subtle drac-border-pink drac-bg-pink drac-p-md drac-m-md">
+            <span class="drac-text drac-line-height drac-text-pink">
+                <a class="drac-anchor drac-text drac-text-white drac-text-purple--hover"
+                href="{% url 'videos-pdf' video_id year month day %}"> Download report </a> <br>
+            </span>
+        </div>
+    </div>
+</body>
+<script>
+    function changeToTab0() {
+
+        window.dispatchEvent(new Event('resize'));
+        document.getElementById("tabR_0").classList.add('drac-tab-active');
+        document.getElementById("tabR_1").classList.remove('drac-tab-active');
+        document.getElementById("tabR_2").classList.remove('drac-tab-active');
+        console.log("1");
+        document.getElementById("div_tabR_0").style.display = "inherit";
+        document.getElementById("div_tabR_1").style.display = "none";
+        document.getElementById("div_tabR_2").style.display = "none";
+
+    }
+
+    function changeToTab1() {
+
+        window.dispatchEvent(new Event('resize'));
+        document.getElementById("tabR_1").classList.add('drac-tab-active');
+        document.getElementById("tabR_0").classList.remove('drac-tab-active');
+        document.getElementById("tabR_2").classList.remove('drac-tab-active');
+
+        document.getElementById("div_tabR_1").style.display = "inherit";
+        document.getElementById("div_tabR_0").style.display = "none";
+        document.getElementById("div_tabR_2").style.display = "none";
+
+    }
+
+    function changeToTab2() {
+
+        window.dispatchEvent(new Event('resize'));
+        document.getElementById("tabR_2").classList.add('drac-tab-active');
+        document.getElementById("tabR_0").classList.remove('drac-tab-active');
+        document.getElementById("tabR_1").classList.remove('drac-tab-active');
+
+        document.getElementById("div_tabR_2").style.display = "inherit";
+        document.getElementById("div_tabR_0").style.display = "none";
+        document.getElementById("div_tabR_1").style.display = "none";
+    }
+
+</script>
+
+</html>

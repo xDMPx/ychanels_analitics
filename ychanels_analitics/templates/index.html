@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'dracula-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'custom.css' %}">
+</head>
+
+<body class="">
+    <h2 class="drac-heading drac-heading-xl drac-text-white"> Monitored Channels: </h2>
+    {% for channel in channels_data %}
+    <div>
+        <div variant="subtle"
+            class="drac-box drac-card drac-card-subtle drac-border-green drac-bg-green drac-p-md drac-m-md">
+            <span class="drac-text drac-line-height drac-text-pink">
+                <a class="drac-anchor drac-text drac-text-white drac-text-purple--hover"
+                    href="{% url 'channels' channel.channel_id %}"> {{ channel.channel_name }}</a> <br>
+            </span>
+        </div>
+    </div>
+    {% endfor %}
+
+    <h2 class="drac-heading drac-heading-xl drac-text-white"> Monitored Videos: </h2>
+
+    {% for vid in vids_data %}
+    <div>
+        <div variant="subtle"
+            class="drac-box drac-card drac-card-subtle drac-border-pink drac-bg-pink drac-p-md drac-m-md">
+            <span class="drac-text drac-line-height drac-text-pink">
+                <a class="drac-anchor drac-text drac-text-white drac-text-purple--hover"
+                    href="{% url 'videos' vid.video_id %}"> {{ vid.title }}</a> <br>
+            </span>
+        </div>
+    </div>
+    {% endfor %}
+
+    <h2 class="drac-heading drac-heading-xl drac-text-white"> Add video or channel ID to monitoring: </h2>
+    <div>
+        <div variant="subtle" class="drac-box drac-card drac-card-subtle drac-border-cyan drac-p-md drac-m-md">
+            <span class="drac-text drac-line-height drac-text-pink">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="drac-btn drac-bg-purple drac-btn-outline drac-text-purple drac-m-sm" type="submit"
+                        value="Submit">
+                </form>
+            </span>
+        </div>
+    </div>
+</body>
+
+</html>
