@@ -10,6 +10,7 @@ YouTube Channel & Video Statistics Report Generator
 - Channel monitoring, based on Channel ID
 - Video monitoring, based on Video ID
 - Statistics:
+    - Subscriber count
     - View count
     - Like count
     - Dislike count
@@ -18,6 +19,30 @@ YouTube Channel & Video Statistics Report Generator
 - Interactive plots
 - Dracula UI
 - PDF report
+
+## Preview
+
+### Home page:
+<img src="./assets/1.png"></img>
+<img src="./assets/2.png"></img>
+<img src="./assets/3.png"></img>
+
+### Video stats page:
+<img src="./assets/4.png"></img>
+<img src="./assets/5.png"></img>
+<img src="./assets/6.png"></img>
+
+### Channel stats page:
+<img src="./assets/10.png"></img>
+
+### Weekly stats:
+<img src="./assets/7.png"></img>
+
+### Monthly stats:
+<img src="./assets/8.png"></img>
+
+### PDF report example:
+<img src="./assets/9.png"></img>
 
 ## Architecture
 
